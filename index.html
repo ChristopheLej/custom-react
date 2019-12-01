@@ -10,13 +10,13 @@
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
   </head>
   <body>
-    <div id="root">Hello</div>
-    <script type="text/babel">
-      const element = (
-        <div id="foo">
-          <h1>Bienvenue sur le site</h1>
-          <a href="#">En savoir plus</a>
-        </div>
+    <div id="root"></div>
+    <script type="text/javascript">
+      const element = React.createElement(
+        'div',
+        { id: 'foo' },
+        React.createElement('h1', null, 'Bienvenue sur le site'),
+        React.createElement('a', { href: '#' }, 'En savoir plus')
       )
       ReactDOM.render(element, document.getElementById('root'))
     </script>
