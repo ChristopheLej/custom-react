@@ -13,13 +13,14 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      const element = Didact.createElement(
-        'div',
-        { id: 'foo' },
-        Didact.createElement('h1', null, 'Bienvenue sur le site'),
-        Didact.createElement('a', { href: '#' }, 'En savoir plus')
+      /** @jsx Didact.createElement */
+      const element = (
+        <div id="foo">
+          <h1>Bienvenue sur le site</h1>
+          <a href="#">En savoir plus</a>
+        </div>
       )
-      console.log(element)
+      Didact.render(element, document.getElementById('root'))
     </script>
   </body>
 </html>
