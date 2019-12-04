@@ -13,12 +13,16 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+      function Compteur({ name }) {
+        return <h1>Bonjour {name}</h1>
+      }
+
       /** @jsx Didact.createElement */
       function step1() {
         console.log('step1')
         const element = (
           <div id="foo">
-            <h1>Bienvenue sur le site</h1>
+            <Compteur name="John" />
             <button onclick={step2}>En savoir plus</button>
           </div>
         )
