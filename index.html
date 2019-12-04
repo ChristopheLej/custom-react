@@ -21,6 +21,15 @@
         </div>
       )
       Didact.render(element, document.getElementById('root'))
+
+      window.setTimeout(() => {
+        const element = (
+          <div id="foo">
+            <a href="#">En savoir moins</a>
+          </div>
+        )
+        Didact.render(element, document.getElementById('root'))
+      }, 2000)
     </script>
   </body>
 </html>

@@ -13,3 +13,24 @@ export function createDom(fiber) {
   //console.log('createDom', dom)
   return dom
 }
+
+const isProperty = k => k !== 'children'
+export function updateDom(dom, prevProps, nextProps) {
+  // Supprime old props
+  Object.keys(prevProps)
+    .filter(isProperty)
+    .forEach(name => {
+      if (!(name in nextProps)) {
+        dom[name] = ''
+      }
+    })
+
+  // Ajoute new props
+  Object.keys(nextProps)
+    .filter(isProperty)
+    .forEach(name => {
+      if (prevProps[name] !== nextProps[name]) {
+        dom[name] = nextProps[name]
+      }
+    })
+}
