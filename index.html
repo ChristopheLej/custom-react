@@ -14,22 +14,35 @@
     <div id="root"></div>
     <script type="text/babel">
       /** @jsx Didact.createElement */
-      const element = (
-        <div id="foo">
-          <h1>Bienvenue sur le site</h1>
-          <a href="#">En savoir plus</a>
-        </div>
-      )
-      Didact.render(element, document.getElementById('root'))
-
-      window.setTimeout(() => {
+      function step1() {
+        console.log('step1')
         const element = (
           <div id="foo">
-            <a href="#">En savoir moins</a>
+            <h1>Bienvenue sur le site</h1>
+            <button onclick={step2}>En savoir plus</button>
           </div>
         )
         Didact.render(element, document.getElementById('root'))
-      }, 2000)
+      }
+
+      function step2() {
+        console.log('step2')
+        const element = (
+          <div id="foo">
+            <p>
+              Nostrud est est reprehenderit commodo mollit proident sint qui ut
+              ut Lorem labore esse. Laboris nisi in dolor deserunt in sunt
+              occaecat ut ipsum laborum irure ipsum ipsum. Nisi elit non aliquip
+              proident nostrud reprehenderit dolor id excepteur minim velit
+              eiusmod quis.
+            </p>
+            <button onclick={step1}>Retour</button>
+          </div>
+        )
+        Didact.render(element, document.getElementById('root'))
+      }
+
+      step1()
     </script>
   </body>
 </html>

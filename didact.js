@@ -7,7 +7,6 @@ let currentRoot = null
 let deletions = []
 
 function render(element, container) {
-  console.log('render')
   wipRoot = {
     dom: container,
     props: {
@@ -40,6 +39,7 @@ function commitWork(fiber) {
     return
   } else if (fiber.effectTag === 'UPDATE' && fiber.dom !== null) {
     updateDom(fiber.dom, fiber.alternate.props, fiber.props)
+    domParent.appendChild(fiber.dom)
   }
 
   commitWork(fiber.child)
@@ -96,7 +96,6 @@ function reconcileChildren(wipFiber, elements) {
     let newFiber = null
 
     if (sameType) {
-      console.log("Modification de l'element", oldFiber.dom)
       newFiber = {
         type: element.type,
         props: element.props,
@@ -108,7 +107,6 @@ function reconcileChildren(wipFiber, elements) {
     }
 
     if (element && !sameType) {
-      console.log("Ajout de l'element", element.type)
       newFiber = {
         type: element.type,
         props: element.props,
@@ -120,7 +118,6 @@ function reconcileChildren(wipFiber, elements) {
     }
 
     if (oldFiber && !sameType) {
-      console.log("Suppression de l'element", oldFiber.dom)
       oldFiber.effectTag = 'DELETION'
       deletions.push(oldFiber)
     }
