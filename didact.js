@@ -5,6 +5,8 @@ let nextUnitofWork = null
 let wipRoot = null
 let currentRoot = null
 let deletions = []
+let hookIndex = null
+let wipFiber = null
 
 function render(element, container) {
   wipRoot = {
@@ -107,6 +109,10 @@ function updateHostComponent(fiber) {
 }
 
 function updateFunctionComponent(fiber) {
+  wipFiber = fiber
+  hookIndex = 0
+  wipFiber.hooks = []
+
   const children = [fiber.type(fiber.props)]
   reconcileChildren(fiber, children)
 }
@@ -163,9 +169,31 @@ function reconcileChildren(wipFiber, elements) {
 
 requestIdleCallback(workLoop)
 
+function useState(initial) {
+  const oldHook =
+    wipFiber.alternate &&
+    wipFiber.alternate.hooks &&
+    wipFiber.alternate.hooks[hookIndex]
+
+  const hook = {
+    state: oldHook ? oldHook.state : initial
+  }
+
+  wipFiber.hooks.push(hook)
+
+  const setState = state => {
+    hook.state = state
+    render(currentRoot.props.children[0], currentRoot.dom)
+  }
+
+  hookIndex++
+  return [hook.state, setState]
+}
+
 window.Didact = {
   createElement,
-  render
+  render,
+  useState
 }
 
 export default Didact
