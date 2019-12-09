@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My react</title>
-    <!-- <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script> -->
+    <script src="https://unpkg.com/react@^16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@^16/umd/react-dom.development.js"></script>
     <script src="didact.js" type="module"></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
   </head>
@@ -14,7 +14,7 @@
     <div id="root"></div>
     <script type="text/babel">
       function useIncrement() {
-        const [n, setN] = Didact.useState(0)
+        const [n, setN] = React.useState(0)
         const increment = () => {
           setN(n + 1)
         }
@@ -27,22 +27,22 @@
           <div>
             <h1>Bonjour {name}</h1>
             compteur: {n}&nbsp;
-            <button onclick={() => increment()}>Incrementer</button>
+            <button onClick={() => increment()}>Incrementer</button>
           </div>
         )
       }
 
-      /** @jsx Didact.createElement */
+      /** Didact.createElement */
       function step1() {
         console.log('step1')
         const element = (
           <div id="foo">
             <Compteur name="John" />
             <p />
-            <button onclick={step2}>En savoir plus</button>
+            <button onClick={step2}>En savoir plus</button>
           </div>
         )
-        Didact.render(element, document.getElementById('root'))
+        ReactDOM.render(element, document.getElementById('root'))
       }
 
       function step2() {
@@ -56,10 +56,10 @@
               proident nostrud reprehenderit dolor id excepteur minim velit
               eiusmod quis.
             </p>
-            <button onclick={step1}>Retour</button>
+            <button onClick={step1}>Retour</button>
           </div>
         )
-        Didact.render(element, document.getElementById('root'))
+        ReactDOM.render(element, document.getElementById('root'))
       }
 
       step1()
